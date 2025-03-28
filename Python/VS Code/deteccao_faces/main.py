@@ -11,28 +11,25 @@ print("O script foi iniciado com sucesso... Aguarde")
 def main():
     cam = iniciar_captura()
 
-    if cam is None:#add
-        exit()#add
+    if cam is None:
+        exit()
 
     # Configuração do VideoWriter para gravar o vídeo processado
-    fourcc = cv2.VideoWriter_fourcc(*'XVID')  # Codec para salvar o vídeo - add
-    out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))  # Define o arquivo de saída - add
+    fourcc = cv2.VideoWriter_fourcc(*'XVID')  #Salvar o vídeo 
+    out = cv2.VideoWriter('output.avi', fourcc, 20.0, (640, 480))  # Define o arquivo de saída
 
     # Define a ROI (Região de Interesse)
-    ROI_X1, ROI_Y1, ROI_X2, ROI_Y2 = 150, 100, 450, 400  # Ajuste conforme necessário - add
+    ROI_X1, ROI_Y1, ROI_X2, ROI_Y2 = 150, 100, 450, 400  # Ajuste conforme necessário
 
     while True:
-        ret, frame = cam.read() # Lê o frame da câmera
-    #   if not ret: # Se for falso, deu errado então break
-    #        break
+        ret, frame = cam.read()
 
         if not ret or frame is None: #add
-            print("Erro ao capturar frame da webcam")#add
-            break  # Sai do loop se houver erro na captura - add
+            print("Erro ao capturar frame da webcam")
+            break
 
 
         faces = detectar_faces(frame)
-        #frame = desenhar_rosto(frame, faces)
 
         # Aplica borramento nos rostos detectados, mas somente se estiverem dentro da ROI
         for (x, y, w, h) in faces:
@@ -44,14 +41,15 @@ def main():
 
 
         # Desenha a caixa da face e aplica a ROI e alerta
-        frame = desenhar_rosto(frame, faces, ROI_X1, ROI_Y1, ROI_X2, ROI_Y2)#add
+        frame = desenhar_rosto(frame, faces, ROI_X1, ROI_Y1, ROI_X2, ROI_Y2)
         
 
         cv2.imshow("Detecting faces", frame)
 
 
     # Grava o frame processado no arquivo de saída
-        out.write(frame) #add
+        out.write(frame)
+
 
         if cv2.waitKey(1) & 0xFF == ord('q'):  # 'q' para sair
             break
@@ -60,5 +58,6 @@ def main():
     out.release()
     cv2.destroyAllWindows()
 
+    
 if __name__ == "__main__":
      main()
