@@ -46,10 +46,8 @@ def main():
 
         cv2.imshow("Detecting faces", frame)
 
-
     # Grava o frame processado no arquivo de saída
         out.write(frame)
-
 
         if cv2.waitKey(1) & 0xFF == ord('q'):  # 'q' para sair
             break
@@ -57,7 +55,6 @@ def main():
     cam.release()
     out.release()
     cv2.destroyAllWindows()
-
     
 if __name__ == "__main__":
      main()

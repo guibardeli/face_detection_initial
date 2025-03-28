@@ -12,6 +12,7 @@ def desenhar_rosto(frame, faces, ROI_X1, ROI_Y1, ROI_X2, ROI_Y2):
         # Verifica se a face está dentro da ROI
         if (x >= ROI_X1 and x + w <= ROI_X2 and y >= ROI_Y1 and y + h <= ROI_Y2):
             cv2.putText(frame, "Rosto na ROI", (x, y - 20), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
+            
 
     return frame
 
